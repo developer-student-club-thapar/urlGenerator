@@ -53,7 +53,7 @@ class HomeScreen extends Component {
     error: '',
     keyword: '',
     customUrl: '',
-
+    loading: false,
   };
 
   handleChange = event => {
@@ -104,6 +104,9 @@ handleCopy = () => {
   };
 
   handleSubmit = async event => {
+    this.setState({
+      loading: true,
+    })
     event.preventDefault();
     const api_fetch = process.env.REACT_APP_API_KEY;
 
@@ -190,6 +193,9 @@ handleCopy = () => {
         });
       }
     }
+    this.setState({
+      loading: false,
+    })
   };
 
   render() {
@@ -272,8 +278,9 @@ handleCopy = () => {
                   cursor: 'pointer',
                   background: 'rgba(1, 87, 155, 100)',
                 }}
+                loading={this.state.loading}
                 onClick={this.handleSubmit}
-              ></MaterialButtonSuccess>
+              />
             </Grid>
             <Grid item xs />
           </Grid>
